@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta charset="UTF-8">
+    <title>Cache Text Flow</title>
+
+	<!-- jQuery library -->
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"> </script>
+
+	<!-- ajax library -->
+  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+
+	<!-- d3 library -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.11.0/d3.min.js"></script>
+
+	<!-- stylesheet  -->
+	<link rel="stylesheet" href="style.css">
+
+	<!-- font -->
+	<link href="https://fonts.googleapis.com/css?family=Cutive+Mono" rel="stylesheet">
+
+</head>
+<body onload="loadCSV()">
+	
+	<!-- background canvas -->
+	<canvas id="textflow"></canvas>
+
+	<!-- logo div -->
+	<div id="logo"><img src="data/logo.png" width="30%" height="30%"></div>
+
+	<!-- title and information -->
+	<div id="rectTitle">
+	 	<div id="topic" onclick= "goToHomepage()">
+	 		<div id="mainTopic">C@cHe</div>
+	 		<div id="subMainTopic">Th3sis M1d-Ye@r P*p-Up $h0w</div>
+        	<div id="time">6 May, 3pm - 7pm</div>  
+         	<div><a href="https://www.google.com/maps/place/6+E+16th+St,+New+York,+NY+10003/@40.7369995,-73.9944154,17z/data=!3m1!4b1!4m5!3m4!1s0x89c259a2868a69e1:0x79b19a0b47c6d645!8m2!3d40.7369955!4d-73.9922214" target="_blank" style="text-decoration: underline;">6E 16th St, 12th Floor</a></div>
+	 	</div>
+	 	<div id= "menu">
+	 		<div class="button" onmouseover="showText(0)" onmouseout="hide(0)">
+	 			<img class="btnImg" src="data/1.jpg">
+	 			<div class="btnText" > project list</a></div>
+	 		</div>
+
+	 		<div class="button" onmouseover="showText(1)" onmouseout="hide(1)">
+	 			<img class="btnImg" src="data/1.jpg">
+	 			<div class="btnText" >floor plan</div>
+	 		</div>
+	 	</div>
+	</div>
+
+	<!-- welcome info -->
+	<div id="welcomeInfo">
+	 		The class of 2018 will be showing off the work from their first and second semester in the MFA Design and Technology.
+	 		<br><br>
+	 		We look forward to seeing you there. Alumns of the program are welcome!
+	 		<br><br>
+	 		<a  href="team.html" target="_blank" style="text-decoration: underline;">Pop Up Show Cache Team</a>
+	</div>
+
+	<!-- name list -->
+	<div id="list">
+		<div id = "nameList"> project list</div>
+
+	</div>
+
+
+	<script src ="./js/Main.js"></script>
+</body>
+</html>
