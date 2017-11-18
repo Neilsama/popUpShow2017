@@ -53,7 +53,8 @@ function draw(){
 setInterval(draw, 10);
 
 
-// html button events
+// --------------------------------------- html events  -----------------------
+	
 	var btns = document.getElementsByClassName("button");
 	var texts = document.getElementsByClassName("btnText");
 	
@@ -65,35 +66,125 @@ setInterval(draw, 10);
 	function hide(e){
 		texts[e].style.visibility = "hidden";
 	}
-	
+
+
+// --------- click project list button	
 
 $(btns[0]).click(function(){
-	$("#rectTitle").animate(
-		{ left: "-240px"}, 
-		500,
-		function(){}	
-    );
-    $("#welcomeInfo").animate(
-    	{left: "300vw"},
-    	700,
-    	function(){}
-    );
-    $("#list").animate(
-    { top: "5vh"},
-    	700,
-    	function(){}
-    );
+	if(homePageState){
+		// move two rectangle
+		$("#rectTitle").animate(
+			{ left: "-240px"}, 
+			500,
+			function(){}	
+    	);
+    	$("#rectWelcome").animate(
+    		{left: "32%"},
+    		700,
+    		function(){}
+    	);
+
+    	// move up list
+    	$("#list").animate(
+    		{ top: "5vh"},
+    		700,
+    		function(){}
+    	);
+
+    	homePageState = false;
+    	projectListState = true;
+    	floorPlanState = false;
+    }else{
+    	if (floorPlanState) {
+    		//move down floor plan
+    		$("#floorPlan").animate({ top: "100%"}, 700, function(){});
+
+    		//move up project list
+    		$("#list").animate(
+    			{ top: "5vh"},
+    			700,
+    			function(){}
+    	);
+    		floorPlanState = false;
+    		projectListState = true;
+    	}
+    }
+  
+});
+
+// ---------- click floor plan button
+
+$(btns[1]).click(function(){
+	if (homePageState) {
+		// move two rectangle
+		$("#rectTitle").animate(
+			{ left: "-240px"}, 
+			500,
+			function(){}	
+    	);
+
+    	$("#rectWelcome").animate(
+    		{left: "32%"},
+    		700,
+    		function(){}
+    	);
+
+		// move up floor plan
+		$("#floorPlan").animate(
+    		{ top: "5vh"},
+    		700,
+    		function(){}
+    	);
+
+		homePageState = false;
+    	projectListState = false;
+    	floorPlanState = true;
+
+	}else{
+		if (projectListState) {
+			// move down project list
+			$("#list").animate({ top: "100%"}, 700, function(){});
+			// move up floor plan
+			$("#floorPlan").animate(
+    		{ top: "5vh"},
+    		700,
+    		function(){}
+    	);
+
+			projectListState = false;
+			floorPlanState = true;
+		}
+	}
 
 });
 
+// ---------- click IMAGE
+$("#floorImg").click(function(){
+	
+});
+
+// ---------- click name go back to homepage
+
 function goToHomepage(){
 	console.log("goToHomepage");
-	$("#rectTitle").animate({ left: "0 px" }, 500, function(){});
-	$("#list").animate({ top: "100%"}, 700, function(){});
-	$("#welcomeInfo").animate({ right: "0%"}, 700, function(){});
+	$("#rectTitle").animate({ left: "0%" }, 500, function(){});
+	$("#rectWelcome").animate({ left: "0%"}, 700, function(){});
+
+	if (projectListState) {
+		$("#list").animate({ top: "100%"}, 700, function(){});
+	}
+	
+	if (floorPlanState) {
+		$("#floorPlan").animate({ top: "100%"}, 700, function(){});
+	}
+
+	homePageState = true;
+	floorPlanState = false;
+	projectListState = false;
+	
 }
 
-// d3 load name list;
+// -------  d3 load name list;
 
 function loadCSV(){
 	console.log("a");
@@ -102,8 +193,6 @@ function loadCSV(){
 		dothings(d, ['name', 'url']);
 	});
 }
-
-
 
 function dothings(data, columns){
 		var table = d3.select('#list').append('table');
@@ -123,14 +212,63 @@ function dothings(data, columns){
 		  .enter()
 		  .append('tr');
 
+
 		// create a cell in each row for each column
 		var cells = rows.selectAll('td')
 		  .data(function (row) {
-		    return columns.map(function (column) {
-		      return {column: column, value: row[column]};
+		    return columns.slice(0,1).map(function (column) {
+					if(column == "name"){
+						return {column: column, value: row[column]};
+					}
+		    });
+
+		  })
+		  .enter()
+		  .append('td')
+		  .text(function (d) { 
+		  	// console.log(d);
+		  	return d.value; 
+		  });
+
+
+
+		  var cells_2 = rows.selectAll('.tdd')
+		  .data(function (row) {
+		  	// console.log(columns)
+
+		    return columns.slice(1,2).map(function (column) {
+					if(column == "url"){
+						return {column: column, value: row[column]};
+					}
 		    });
 		  })
 		  .enter()
 		  .append('td')
-		  .text(function (d) { return d.value; });
+		  .attr('class','url_')
+
+		  d3.selectAll('.url_')
+		  .append('a')
+		  .text(function(d){
+		  	// console.log(d)
+		  	return d.value
+		  })
+		  .attr('href',function(d){
+		  	// console.log(d)
+		  	return d.value
+		  })
+
 }
+
+
+//  --------- hover on each row in table
+// $ tr.css('background',  '#eeeeee');
+
+// $('#list table tbody tr').mousedown(function(){
+// // 	function(){
+// // 		$(this).css('background', '#12345a')
+// // 	},
+// // 	function(){
+// // 		$(this).css('background', '#FFFFFF')
+// // 	}
+// );
+

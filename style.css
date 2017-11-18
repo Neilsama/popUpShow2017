@@ -20,9 +20,9 @@ body{
 #rectTitle{
     position: relative;
     left: 0px;
-    width: 46vw	;
+    width: 100%	;
     height: 36vh;
-    margin-top: 16vh;	
+    margin-top: 10%;	
 }
 
 #topic{
@@ -31,7 +31,8 @@ body{
 	background: rgba(0,0,0,0.7);
 	color: white;
 	text-align: right;
-	height: 36vh;
+	width: 20%;
+	height: 100%;
   	padding-right: 3vw;
   	padding-left: 18vw;
   	float: left;
@@ -41,7 +42,7 @@ body{
 	display: inline-block;
 	position: absolute;
 	float: right;
-    width: 26%	;
+    width: 12%	;
     height: 36vh;
 }
 
@@ -90,6 +91,7 @@ body{
 }
 
 a{
+	text-decoration: none;
 	color: white;
 	font-size: 14pt;
 }
@@ -101,22 +103,29 @@ a{
 }
 
 /*css for welcom info rectangle*/
+#rectWelcome{
+	position: fixed;
+	width: 100%;
+	bottom: 0px;
+}
 #welcomeInfo {
 	font-size: 12pt;
-	position: fixed;
-	bottom: 0;
+	bottom: 0px;
 	float: right;
-	width: 30vw;
+	width: 30%;
 	bottom: 0vh;
-	right: 0%;
+	left: 70%;
 	text-align: left;
 	color: #FFF;
   	background: rgba(0,0,0,0.7);
   	padding: 2vh;
-  	margin-top: 18vh;
 }
 
-#list{
+#welcomInfo.a{
+	
+}
+
+.popUpWindow{
 	position: absolute;
 	width: 60%;
 	height: 90%;
@@ -127,7 +136,7 @@ a{
 	z-index: 80;
 }
 
-#nameList{
+.title{
 	width: 90%;
 	height:10%;
 	font-size: 30pt;
@@ -137,6 +146,13 @@ a{
 	margin-top: 3%;
 	/*border: 1px solid grey;*/
 }
+
+#floorImg{
+	width: 80%;
+	margin-left: 10%;
+	margin-top: 3%;
+}
+
 
 table{
 	position: absolute;	
@@ -165,6 +181,10 @@ tr{
 	text-align: center;
 	vertical-align: middle;
 }
+/*tr: hover{
+	background-color: #FFFF99; 
+}*/
+
 
 td{
 	width: 20%;
