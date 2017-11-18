@@ -6,7 +6,10 @@ canvas{
 
 body{
 	font-family: 'Cutive Mono', monospace;
+	overflow: auto;
 	overflow-y: hidden;
+	width: inherit;
+	height: inherit;
 }
 
 #logo{

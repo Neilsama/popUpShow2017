@@ -22,6 +22,7 @@ function resizeCanvas() {
 
 window.onresize = resizeCanvas();
 resizeCanvas();
+$('body').css('overflow', 'hidden');
 
 
 var columns = cnvs.width/font_size;
@@ -249,12 +250,12 @@ function dothings(data, columns){
 		  d3.selectAll('.url_')
 		  .append('a')
 		  .text(function(d){
-		  	// console.log(d)
+		  	 console.log(d)
 		  	return d.value
 		  })
 		  .attr('href',function(d){
-		  	// console.log(d)
-		  	return d.value
+		  	 //console.log(d)
+		  	return "http://"+d.value
 		  })
 
 }
