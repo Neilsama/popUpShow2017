@@ -261,15 +261,3 @@ function dothings(data, columns){
 }
 
 
-//  --------- hover on each row in table
-// $ tr.css('background',  '#eeeeee');
-
-// $('#list table tbody tr').mousedown(function(){
-// // 	function(){
-// // 		$(this).css('background', '#12345a')
-// // 	},
-// // 	function(){
-// // 		$(this).css('background', '#FFFFFF')
-// // 	}
-// );
-
