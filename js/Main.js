@@ -164,6 +164,8 @@ $("#floorImg").click(function(){
 	
 });
 
+
+
 // ---------- click name go back to homepage
 
 function goToHomepage(){
@@ -187,77 +189,175 @@ function goToHomepage(){
 
 // -------  d3 load name list;
 
-function loadCSV(){
-	console.log("a");
-	d3.csv('data/userInfo_real.csv',function(d){
-		console.log(d);
-		dothings(d, ['name', 'url']);
-	});
-}
+// function loadCSV(){
+// 	console.log("a");
+// 	d3.csv('data/userInfo_real.csv',function(d){
+// 		// console.log(d);
+// 		dothings(d, ['name','title', 'url']);
+// 	});
+// }
 
-function dothings(data, columns){
+// function dothings(data, columns){
+// 		var table = d3.select('#list').append('table');
+// 		var thead = table.append('thead')
+// 		var	tbody = table.append('tbody');
+
+// 		// append the header row
+// 		thead.append('tr')
+// 		  .selectAll('th')
+// 		  .data(columns).enter()
+// 		  .append('th')
+// 		  .text(function (column) {
+// 		   return column; 
+// 		});
+
+// 		// create a row for each object in the data
+// 		var rows = tbody.selectAll('tr')
+// 		  .data(data)
+// 		  .enter()
+// 		  .append('tr');
+
+
+// 		// create a cell in each row for each column
+
+// 		//fetch name list show as text
+// 		var cells = rows.selectAll('td')
+// 		  .data(function (row) {
+// 		    return columns.slice(0,1).map(function (column) {
+// 					if(column == "name"){
+// 						return {column: column, value: row[column]};
+// 					}
+// 		    });
+
+// 		  })
+// 		  .enter()
+// 		  .append('td')
+// 		  .text(function (d) { 
+// 		  	 // console.log(d);
+// 		  	return d.value; 
+// 		  });
+
+
+		 //fetch url list add class "url_"--------------------------------
+		  // var cells_2 = rows.selectAll('.tdd')
+		  // .data(function (row) {
+		  // 	// console.log(columns)
+
+		  //   return columns.slice(2,3).map(function (column) {
+				// 	if(column == "url"){
+				// 		return {column: column, value: row[column]};
+				// 	}
+		  //   });
+		  // })
+		  // .enter()
+		  // .append('td')
+		  // .attr('class','url_')
+
+
+		  // d3.selectAll('.url_')
+		  // .append('a')
+		  // .text(function(d){
+		  // 	 console.log(d)
+		  // 	return d.value
+		  // })
+		  // .attr('href',function(d){
+		  // 	 //console.log(d)
+		  // 	return "http://"+d.value
+		  // })
+
+
+		  //fetch url list add class "url_"--------------------------------
+
+	function loadCSV(){
+		// console.log("a");
+		d3.csv('data/userInfo_real.csv',function(d){
+		// console.log(d);
+		dothings(d, ['NAME','TITLE', 'url']);
+		});
+	}
+
+	function dothings(data, columns){
 		var table = d3.select('#list').append('table');
 		var thead = table.append('thead')
 		var	tbody = table.append('tbody');
 
 		// append the header row
+		var newCol = columns.slice(0,2);
 		thead.append('tr')
 		  .selectAll('th')
-		  .data(columns).enter()
+		  .data(newCol).enter()
 		  .append('th')
-		  .text(function (column) { return column; });
+		  .text(function (column) {
+		   return column; 
+		});
 
 		// create a row for each object in the data
+		var name = [];
+		var title = [];
+		var url = [];
+
 		var rows = tbody.selectAll('tr')
 		  .data(data)
 		  .enter()
-		  .append('tr');
 
-
-		// create a cell in each row for each column
-		var cells = rows.selectAll('td')
-		  .data(function (row) {
+		// push name[]  
+		rows.selectAll('td')
+		  .data(function (row) {		  	
 		    return columns.slice(0,1).map(function (column) {
-					if(column == "name"){
-						return {column: column, value: row[column]};
+					if(column == "NAME"){
+						name.push(row[column]);
 					}
 		    });
 
 		  })
-		  .enter()
-		  .append('td')
-		  .text(function (d) { 
-		  	// console.log(d);
-		  	return d.value; 
-		  });
 
-
-
-		  var cells_2 = rows.selectAll('.tdd')
-		  .data(function (row) {
-		  	// console.log(columns)
-
+		// push title[]
+		rows.selectAll('td')
+		  .data(function (row) {		  	
 		    return columns.slice(1,2).map(function (column) {
-					if(column == "url"){
-						return {column: column, value: row[column]};
+					if(column == "TITLE"){
+						title.push(row[column]);
 					}
 		    });
-		  })
-		  .enter()
-		  .append('td')
-		  .attr('class','url_')
 
-		  d3.selectAll('.url_')
-		  .append('a')
-		  .text(function(d){
-		  	 console.log(d)
-		  	return d.value
-		  })
-		  .attr('href',function(d){
-		  	 //console.log(d)
-		  	return "http://"+d.value
 		  })
 
-}
+		// push url[]
+		rows.selectAll('td')
+		  .data(function (row) {		  	
+		    return columns.slice(2,3).map(function (column) {
+					if(column == "url"){
+						url.push(row[column]);
+					}
+		    });
+
+		  })
+
+		// add name[] content to td
+		for (var i = 0; i < data.length; i++) {
+			tbody
+			.append('tr')
+			.attr('id', i)
+			.append('td')
+			.text(name[i])
+			
+		}
+
+		// add title[] content to td, add url[] to each title
+		for (var i = 0; i < data.length; i++) {
+			var cell = tbody.select('[id="'+i+'"]')
+			.append('td')
+			.append('a')
+			.text(title[i])
+			.attr('href', url[i])
+		}
+	  
+	}
+
+	// ----------- hover
+
+$("tbody ").hover(function(){
+	console.log("hover");
+});
 
 

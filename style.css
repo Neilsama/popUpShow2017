@@ -185,15 +185,16 @@ tr{
 	text-align: center;
 	vertical-align: middle;
 }
-/*tr: hover{
-	background-color: #FFFF99; 
-}*/
-
 
 td{
 	width: 20%;
 	font-size: 14pt;
 	vertical-align: middle;
+}
+
+tbody a{
+	color: white;
+	text-decoration: none;
 }
 
 
